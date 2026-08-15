@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang='zh-TW'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>Medical Passport</title>
+<style>
+header{box-shadow:0 8px 25px rgba(40,120,216,.12)}
+header select{border:0;border-radius:12px;padding:10px 14px;background:#fff;color:#17324d;font-weight:700}
+body{font-family:Arial,'Noto Sans TC',sans-serif;background:#eef7ff;margin:0;color:#123}
+header{background:linear-gradient(135deg,#1e88e5,#7ec8ff);color:#fff;padding:22px}
+.wrap{max-width:900px;margin:auto}select,button,input,textarea{font:inherit}
+.card{background:#fff;margin:18px auto;padding:18px;border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:700px){.grid{grid-template-columns:1fr}}
+label{font-size:12px;color:#467;display:block;margin:4px 0}input,textarea{width:100%;padding:10px;border:1px solid #cfe3f6;border-radius:10px}textarea{height:84px}
+button{
+background:linear-gradient(135deg,#2F8CFF,#5EB8FF);
+color:#fff;border:0;padding:12px 20px;border-radius:14px;
+font-weight:700;cursor:pointer;
+box-shadow:0 10px 22px rgba(47,140,255,.35),0 4px 8px rgba(47,140,255,.2);
+transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 14px 28px rgba(47,140,255,.42),0 6px 12px rgba(47,140,255,.25);
+filter:brightness(1.03);
+}
+button:active{
+transform:translateY(3px) scale(.98);
+box-shadow:0 3px 8px rgba(47,140,255,.25);
+}
+</style></head><body>
+<header><div class='wrap'><div style='display:flex;justify-content:space-between;align-items:center;gap:10px'>
+<div><div style="font-size:25px;font-weight:800;letter-spacing:.3px">🩺 <span id="title">My Medical Passport</span></div><div id="sub" style="opacity:.9;margin-top:5px">Personal Medical Record</div></div>
+<select id='lang'>
+<option value='zh-TW'>🇹🇼 繁體中文</option><option value='zh-CN'>🇨🇳 简体中文</option><option value='en'>🇺🇸 English</option><option value='ko'>🇰🇷 한국어</option><option value='ja'>🇯🇵 日本語</option><option value='es'>🇪🇸 Español</option><option value='fr'>🇫🇷 Français</option><option value='de'>🇩🇪 Deutsch</option><option value='it'>🇮🇹 Italiano</option><option value='ru'>🇷🇺 Русский</option><option value='pt'>🇵🇹 Português</option><option value='ar'>🇸🇦 العربية</option></select></div></div></header>
+<div class='wrap'>
+<div class='card'><div style='display:flex;justify-content:space-between;align-items:center'><h3 id='basic'>基本資料</h3><button id='save'>儲存</button></div>
+<div class='grid'>
+<div><label id='lname'>姓名</label><input></div><div><label id='ldob'>出生日期</label><input type='date'></div>
+<div><label id='lsex'>性別</label><input></div><div><label id='lblood'>血型</label><input></div>
+<div style='grid-column:1/-1'><label id='lnation'>國籍</label><input></div></div></div>
+<div class='card'><label id='lallergy'>過敏</label><textarea></textarea></div>
+<div class='card'><label id='lhistory'>疾病史</label><textarea></textarea></div>
+<div class='card'><label id='lfamily'>家族史</label><textarea></textarea></div>
+<div class='card'><label id='lsurgery'>手術史</label><textarea></textarea></div>
+<div class='card'><label id='lmeds'>用藥史</label><textarea></textarea></div>
+<div class='card'><label id='lvacc'>疫苗</label><textarea></textarea></div>
+<div class='card'><label id='llife'>生活史</label><textarea></textarea></div>
+<div class='card'><label id='lother'>其他資訊</label><textarea></textarea></div>
+</div>
+<script>
+const T={"fr": {"lang": "Français", "title": "Passeport médical", "sub": "Dossier médical personnel", "save": "Enregistrer", "basic": "Informations de base", "name": "Nom complet", "dob": "Date de naissance", "sex": "Sexe", "blood": "Groupe sanguin", "nation": "Nationalité", "allergy": "Allergies", "history": "Antécédents médicaux", "family": "Antécédents familiaux", "surgery": "Chirurgies", "meds": "Médicaments", "vacc": "Vaccinations", "life": "Mode de vie", "other": "Autres informations"}, "de": {"lang": "Deutsch", "title": "Medizinischer Pass", "sub": "Persönliche Krankenakte", "save": "Speichern", "basic": "Grunddaten", "name": "Vollständiger Name", "dob": "Geburtsdatum", "sex": "Geschlecht", "blood": "Blutgruppe", "nation": "Nationalität", "allergy": "Allergien", "history": "Krankengeschichte", "family": "Familienanamnese", "surgery": "Operationen", "meds": "Medikamente", "vacc": "Impfungen", "life": "Lebensstil", "other": "Weitere Informationen"}, "it": {"lang": "Italiano", "title": "Passaporto medico", "sub": "Cartella clinica personale", "save": "Salva", "basic": "Informazioni di base", "name": "Nome completo", "dob": "Data di nascita", "sex": "Sesso", "blood": "Gruppo sanguigno", "nation": "Nazionalità", "allergy": "Allergie", "history": "Storia clinica", "family": "Anamnesi familiare", "surgery": "Interventi chirurgici", "meds": "Farmaci", "vacc": "Vaccinazioni", "life": "Stile di vita", "other": "Altre informazioni"}, "ru": {"lang": "Русский", "title": "Медицинский паспорт", "sub": "Личная медицинская карта", "save": "Сохранить", "basic": "Основные данные", "name": "Полное имя", "dob": "Дата рождения", "sex": "Пол", "blood": "Группа крови", "nation": "Гражданство", "allergy": "Аллергии", "history": "История болезней", "family": "Семейный анамнез", "surgery": "Операции", "meds": "Лекарства", "vacc": "Вакцинация", "life": "Образ жизни", "other": "Другая информация"}, "pt": {"lang": "Português", "title": "Passaporte Médico", "sub": "Prontuário médico pessoal", "save": "Guardar", "basic": "Informações básicas", "name": "Nome completo", "dob": "Data de nascimento", "sex": "Sexo", "blood": "Tipo sanguíneo", "nation": "Nacionalidade", "allergy": "Alergias", "history": "Histórico médico", "family": "Histórico familiar", "surgery": "Cirurgias", "meds": "Medicamentos", "vacc": "Vacinas", "life": "Estilo de vida", "other": "Outras informações"}, "ar": {"lang": "العربية", "title": "جواز السفر الطبي", "sub": "السجل الطبي الشخصي", "save": "حفظ", "basic": "المعلومات الأساسية", "name": "الاسم الكامل", "dob": "تاريخ الميلاد", "sex": "الجنس", "blood": "فصيلة الدم", "nation": "الجنسية", "allergy": "الحساسية", "history": "التاريخ المرضي", "family": "التاريخ العائلي", "surgery": "العمليات الجراحية", "meds": "الأدوية", "vacc": "التطعيمات", "life": "نمط الحياة", "other": "معلومات أخرى"}, "en": {"lang": "English", "title": "Medical Passport", "sub": "Personal Medical Record", "save": "Save", "basic": "Basic Information", "name": "Full Name", "dob": "Date of Birth", "sex": "Sex", "blood": "Blood Type", "nation": "Nationality", "allergy": "Allergies", "history": "Medical History", "family": "Family History", "surgery": "Surgery History", "meds": "Medications", "vacc": "Vaccinations", "life": "Lifestyle", "other": "Other Information"}, "zh-TW": {"lang": "繁體中文", "title": "隨身電子病歷", "sub": "個人醫療紀錄", "save": "儲存", "basic": "基本資料", "name": "姓名", "dob": "出生日期", "sex": "性別", "blood": "血型", "nation": "國籍", "allergy": "過敏", "history": "疾病史", "family": "家族史", "surgery": "手術史", "meds": "用藥史", "vacc": "疫苗", "life": "生活史", "other": "其他資訊"}, "zh-CN": {"lang": "简体中文", "title": "随身电子病历", "sub": "个人医疗记录", "save": "保存", "basic": "基本资料", "name": "姓名", "dob": "出生日期", "sex": "性别", "blood": "血型", "nation": "国籍", "allergy": "过敏", "history": "疾病史", "family": "家族史", "surgery": "手术史", "meds": "用药史", "vacc": "疫苗", "life": "生活史", "other": "其他信息"}, "ja": {"lang": "日本語", "title": "電子カルテ", "sub": "個人医療記録", "save": "保存", "basic": "基本情報", "name": "氏名", "dob": "生年月日", "sex": "性別", "blood": "血液型", "nation": "国籍", "allergy": "アレルギー", "history": "既往歴", "family": "家族歴", "surgery": "手術歴", "meds": "服薬歴", "vacc": "予防接種", "life": "生活歴", "other": "その他"}, "ko": {"lang": "한국어", "title": "전자 의료기록", "sub": "개인 의료 기록", "save": "저장", "basic": "기본 정보", "name": "이름", "dob": "생년월일", "sex": "성별", "blood": "혈액형", "nation": "국적", "allergy": "알레르기", "history": "병력", "family": "가족력", "surgery": "수술력", "meds": "복약력", "vacc": "예방접종", "life": "생활력", "other": "기타 정보"}, "es": {"lang": "Español", "title": "Pasaporte Médico", "sub": "Historia clínica personal", "save": "Guardar", "basic": "Información básica", "name": "Nombre completo", "dob": "Fecha de nacimiento", "sex": "Sexo", "blood": "Grupo sanguíneo", "nation": "Nacionalidad", "allergy": "Alergias", "history": "Antecedentes médicos", "family": "Antecedentes familiares", "surgery": "Cirugías", "meds": "Medicamentos", "vacc": "Vacunas", "life": "Estilo de vida", "other": "Otra información"}};
+function apply(lang){
+ let t=T[lang]; document.documentElement.lang=lang;
+ title.textContent=t.title; sub.textContent=t.sub; basic.textContent=t.basic; save.textContent=t.save;
+ lname.textContent=t.name; ldob.textContent=t.dob; lsex.textContent=t.sex; lblood.textContent=t.blood; lnation.textContent=t.nation;
+ lallergy.textContent=t.allergy; lhistory.textContent=t.history; lfamily.textContent=t.family; lsurgery.textContent=t.surgery;
+ lmeds.textContent=t.meds; lvacc.textContent=t.vacc; llife.textContent=t.life; lother.textContent=t.other;
+ document.body.dir = 'ltr';
+}
+function flashSave(){
+ const b=document.getElementById('save');
+ const txt=b.textContent;
+ const ok={{"zh-TW":"✓ 已儲存","zh-CN":"✓ 已保存","en":"✓ Saved","ja":"✓ 保存完了","ko":"✓ 저장 완료","es":"✓ Guardado","fr":"✓ Enregistré","de":"✓ Gespeichert","it":"✓ Salvato","pt":"✓ Guardado","ru":"✓ Сохранено","ar":"✓ تم الحفظ"}};
+ b.textContent=ok[lang.value]||"✓ Saved";
+ b.style.background="linear-gradient(135deg,#16A34A,#4ADE80)";
+ setTimeout(()=>{{apply(lang.value);b.style.background="linear-gradient(135deg,#2F8CFF,#5EB8FF)";}},1400);
+}
+save.onclick=flashSave;
+lang.onchange=e=>apply(e.target.value); apply('zh-TW');
+</script></body></html>
